@@ -7,13 +7,12 @@ public class BallController : MonoBehaviour
     [SerializeField] BatController bat;
     [SerializeField] float speed = 10f;
     [SerializeField] float speedIncrease;
-    [SerializeField] int hitsAmount;
 
     public void Hit()
     {
         rb.velocity = new Vector2(-speed, 0);
         speed += speedIncrease;
-        hitsAmount++;
+        bat.HitsAmount++;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -24,12 +23,11 @@ public class BallController : MonoBehaviour
             {
                 Hit();
 
-                if(hitsAmount >= 10)
+                if(bat.ShouldPauseAnimation())
                 {
                     StartCoroutine(HitPause());
                 }
             }
-
 
             else
             {
@@ -51,9 +49,10 @@ public class BallController : MonoBehaviour
 
     private IEnumerator HitPause()
     {
-        // effects
         rb.velocity = Vector2.zero;
-        yield return new WaitForSeconds(3);
+        bat.BatAnimator.speed = 0;
+        yield return new WaitForSeconds(1);
+        bat.BatAnimator.speed = 1;
         Hit();
 
     }

@@ -2,17 +2,30 @@ using UnityEngine;
 
 public class BatController : MonoBehaviour, IBat
 {
-    [SerializeField] private Animator animator;
+    public Animator BatAnimator;
     private bool isAbleToHit = true;
+    public bool IsAbleToSwing = true;
+    public int HitsAmount;
+    
     public bool IsAbleToHit
     {
         get { return isAbleToHit; }
         private set { isAbleToHit = value; }
     }
 
+    public void MoveBat(Vector3 newPosition)
+    {
+        transform.position = newPosition;
+        BatHit();
+    }
+
     public void CantHit() => IsAbleToHit = false;
 
     public void CanHit() => IsAbleToHit = true;
+
+    public void CanSwing() => IsAbleToSwing = true;
+    public void CantSwing() => IsAbleToSwing = false;
+
 
     public void HideBat() => gameObject.SetActive(false);
 
@@ -21,9 +34,17 @@ public class BatController : MonoBehaviour, IBat
         return IsAbleToHit;
     }
 
+    public bool ShouldPauseAnimation()
+    {
+        return HitsAmount >= 3;
+    }
+
     public void BatHit()
     {
-        gameObject.SetActive(true);
-        animator.SetTrigger("Hit");
+        if (IsAbleToSwing)
+        {
+            gameObject.SetActive(true);
+            BatAnimator.SetTrigger("Hit");
+        }
     }
 }
