@@ -48,16 +48,12 @@ public class Observer<T>
 
     public void AddListener(UnityAction<T> callback)
     {
-        if(callback == null)
+        if (callback == null)
         {
             return;
         }
 
-        if(onValueChanged == null)
-        {
-            onValueChanged = new UnityEvent<T>();
-
-        }
+        onValueChanged ??= new UnityEvent<T>();
 
         onValueChanged.AddListener(callback);
     }

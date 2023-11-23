@@ -1,32 +1,29 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class BatController : MonoBehaviour
+public class BatController : MonoBehaviour, IBat
 {
-    [SerializeField] Animator animator;
-    [SerializeField] Transform hitPoint;
-    [SerializeField] float attackRange;
-    [SerializeField] LayerMask ballLayer;
-
-    public float speed = 10.0f;
-
-    private void Update()
+    [SerializeField] private Animator animator;
+    private bool isAbleToHit = true;
+    public bool IsAbleToHit
     {
-        // Detect user input
-        if (Input.GetMouseButtonDown(0))
-        {
-            HitBall();
-        }
+        get { return isAbleToHit; }
+        private set { isAbleToHit = value; }
     }
 
-    private void HitBall()
+    public void CantHit() => IsAbleToHit = false;
+
+    public void CanHit() => IsAbleToHit = true;
+
+    public void HideBat() => gameObject.SetActive(false);
+
+    public bool CanItHit()
     {
-        BatHit();
+        return IsAbleToHit;
     }
 
     public void BatHit()
     {
+        gameObject.SetActive(true);
         animator.SetTrigger("Hit");
     }
 }

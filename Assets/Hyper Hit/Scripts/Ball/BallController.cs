@@ -1,28 +1,60 @@
+using System.Collections;
 using UnityEngine;
 
 public class BallController : MonoBehaviour
 {
-    private Rigidbody2D rb;
-
+    [SerializeField] Rigidbody2D rb;
+    [SerializeField] BatController bat;
     [SerializeField] float speed = 10f;
     [SerializeField] float speedIncrease;
-
-    private void Start()
-    {
-        rb = GetComponent<Rigidbody2D>();
-    }
+    [SerializeField] int hitsAmount;
 
     public void Hit()
     {
         rb.velocity = new Vector2(-speed, 0);
         speed += speedIncrease;
+        hitsAmount++;
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Bat"))
+        if (collision.CompareTag("Bat"))
         {
-            Hit();
+            if (bat != null && bat.IsAbleToHit)
+            {
+                Hit();
+
+                if(hitsAmount >= 10)
+                {
+                    StartCoroutine(HitPause());
+                }
+            }
+
+
+            else
+            {
+                Debug.Log("LOSE");
+            }
         }
+        else if (collision.CompareTag("Wall"))
+        {
+            if (rb != null)
+            {
+                rb.velocity = Vector2.zero;
+            }
+            else
+            {
+                Debug.LogError("Rigidbody2D (rb) is not assigned on BallController");
+            }
+        }
+    }
+
+    private IEnumerator HitPause()
+    {
+        // effects
+        rb.velocity = Vector2.zero;
+        yield return new WaitForSeconds(3);
+        Hit();
+
     }
 }
