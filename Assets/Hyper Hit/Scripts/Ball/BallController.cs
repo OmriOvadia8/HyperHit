@@ -8,9 +8,16 @@ public class BallController : MonoBehaviour
     [SerializeField] float speed = 10f;
     [SerializeField] float speedIncrease;
 
+    private void Start()
+    {
+        rb.velocity = Vector2.zero;
+    }
+
     public void Hit()
     {
-        rb.velocity = new Vector2(-speed, 0);
+        float angle = Random.Range(90f, 270f);
+        Vector2 direction = new Vector2(Mathf.Cos(angle * Mathf.Deg2Rad), Mathf.Sin(angle * Mathf.Deg2Rad));
+        rb.velocity = direction * speed;
         speed += speedIncrease;
         bat.HitsAmount++;
     }
@@ -32,17 +39,6 @@ public class BallController : MonoBehaviour
             else
             {
                 Debug.Log("LOSE");
-            }
-        }
-        else if (collision.CompareTag("Wall"))
-        {
-            if (rb != null)
-            {
-                rb.velocity = Vector2.zero;
-            }
-            else
-            {
-                Debug.LogError("Rigidbody2D (rb) is not assigned on BallController");
             }
         }
     }
