@@ -265,7 +265,7 @@ GameObject:
   - component: {fileID: 370588925}
   - component: {fileID: 370588928}
   - component: {fileID: 370588927}
-  - component: {fileID: 370588926}
+  - component: {fileID: 370588929}
   m_Layer: 0
   m_Name: Bat
   m_TagString: Bat
@@ -340,8 +340,47 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!58 &370588926
-CircleCollider2D:
+--- !u!114 &370588927
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 370588922}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 194536ba423af7b4596b77dfa11d7261, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BatAnimator: {fileID: 370588928}
+  batCollider: {fileID: 370588929}
+  effectMilestone: 0
+  pauseMilestone: 0
+  HitsAmount: 0
+  DidHit: 0
+--- !u!95 &370588928
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 370588922}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: a9c27780effcac342b5aa7ff5070851e, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!70 &370588929
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -372,45 +411,9 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.03, y: 3.14}
-  serializedVersion: 2
-  m_Radius: 1.56
---- !u!114 &370588927
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 370588922}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 194536ba423af7b4596b77dfa11d7261, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  BatAnimator: {fileID: 370588928}
-  IsAbleToSwing: 1
-  HitsAmount: 0
---- !u!95 &370588928
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 370588922}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: a9c27780effcac342b5aa7ff5070851e, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
+  m_Offset: {x: -1, y: 3}
+  m_Size: {x: 3, y: 4}
+  m_Direction: 0
 --- !u!1 &371092162
 GameObject:
   m_ObjectHideFlags: 0

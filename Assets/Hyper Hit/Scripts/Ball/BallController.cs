@@ -8,15 +8,13 @@ public class BallController : MonoBehaviour
     [SerializeField] float speed = 10f;
     [SerializeField] float speedIncrease;
 
-    private void Start()
-    {
-        rb.velocity = Vector2.zero;
-    }
+    private void Start() => rb.velocity = Vector2.zero;
 
     public void Hit()
     {
+        bat.DidHit = true;
         float angle = Random.Range(90f, 270f);
-        Vector2 direction = new Vector2(Mathf.Cos(angle * Mathf.Deg2Rad), Mathf.Sin(angle * Mathf.Deg2Rad));
+        Vector2 direction = new(Mathf.Cos(angle * Mathf.Deg2Rad), Mathf.Sin(angle * Mathf.Deg2Rad));
         rb.velocity = direction * speed;
         speed += speedIncrease;
         bat.HitsAmount++;
@@ -26,13 +24,16 @@ public class BallController : MonoBehaviour
     {
         if (collision.CompareTag("Bat"))
         {
-            if (bat != null && bat.IsAbleToHit)
+            if (bat != null && bat.IsAbleToHit && !bat.DidHit)
             {
-                Hit();
-
-                if(bat.ShouldPauseAnimation())
+                if (bat.ShouldPauseAnimation())
                 {
                     StartCoroutine(HitPause());
+                }
+
+                else
+                {
+                    Hit();
                 }
             }
 
