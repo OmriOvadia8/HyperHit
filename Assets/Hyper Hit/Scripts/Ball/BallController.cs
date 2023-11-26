@@ -51,6 +51,5 @@ public class BallController : MonoBehaviour
         yield return new WaitForSeconds(1);
         bat.BatAnimator.speed = 1;
         Hit();
-
     }
 }

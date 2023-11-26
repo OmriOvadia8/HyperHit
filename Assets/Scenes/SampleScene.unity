@@ -355,7 +355,7 @@ MonoBehaviour:
   BatAnimator: {fileID: 370588928}
   batCollider: {fileID: 370588929}
   effectMilestone: 0
-  pauseMilestone: 0
+  pauseMilestone: 10
   HitsAmount: 0
   DidHit: 0
 --- !u!95 &370588928
